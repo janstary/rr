@@ -1,0 +1,85 @@
+.Dd May 2, 2022
+.Dt RR 1
+.Os
+.Sh NAME
+.Nm rr
+.Nd run register machines
+.Sh SYNOPSIS
+.Nm
+.Op Fl qv
+.Ar file
+.Sh DESCRIPTION
+.Nm
+runs register machines.
+These are simple machines that operate on an array of numbered registers
+and recognize the following instructions:
+.Pp
+.Bl -tag -width xx -compact
+.It Ic i Ns Ar r
+Increment register
+.Ar r .
+.It Ic d Ns Ar r
+Decrement register
+.Ar r .
+.It Ic j Ns Ar n
+Jump
+.Ar n
+instructions (positive or negative).
+.El
+.Pp
+The registers contain non-negative integers.
+The
+.Ic i
+instruction increments the value in the given register.
+The
+.Ic d
+instruction decrements the value in the given register if positive
+and skips the next instruction;
+if the current value in the register is zero, the register is not changed.
+With the
+.Ic j
+instruction, the registers are not changed:
+the machine jumps the given number of instructions
+forward or backward in the list of instructions.
+The machine halts if this would mean to jump out of the list,
+or if there are no more instructions.
+.Pp
+The instructions are given in a
+.Ar file ,
+one instruction on one line.
+After the instruction letter and a number (see examples below),
+the rest of the line is ignored and can be used for comments.
+.Pp
+Once the instructions are parsed,
+.Nm
+reads lines of numbers separated by spaces from standard input,
+initializing registers 1 to n with the numbers,
+and runs the machine for every input line.
+Empty input lines are ignored.
+If and when the machine halts,
+the content of register 0 is the result,
+computing in effect an n-ary integer function.
+By default,
+.Nm
+operates quietly and only prints out the result
+for each input line of registers.
+With the
+.Fl q
+option,
+.Nm
+stays quiet.
+With the
+.Fl v
+option, it prints out the content of registers
+and the instructions being performed in every step.
+.Sh EXAMPLES
+Enter an infinite loop:
+.D1 j0
+.Pp
+Copy the number in register one into register zero:
+.D1 d1	take one from register 1
+.D1 j3	halt if register 1 exhausted
+.D1 i0	give the one to register 0
+.D1 j-3	repeat
+.Sh AUTHORS
+.An Jan Starý Aq Mt hans@stare.cz

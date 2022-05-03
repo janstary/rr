@@ -1,0 +1,6 @@
+Have a 'p r' instruction for printing a register.
+
+Have a preprocessor that concatenates machines:
+a jump out to the first instruction that does not exist
+then means to start the next machine.
+Similarly, do an if-then on machines.

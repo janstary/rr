@@ -1,0 +1,4 @@
+d1	take one from register 1
+j3	jump out if exhausted
+i0	add the one into register 0
+j-3	repeat

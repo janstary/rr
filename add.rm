@@ -1,0 +1,8 @@
+d1	take one from register 1
+j3	jump to next summand if done here
+i0	put one into register 0
+j-3	repeat
+d2	take one from register 2
+j3	jump out if done here
+i0	put one into register 0
+j-3	repeat
